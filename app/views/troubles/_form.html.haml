@@ -1,0 +1,20 @@
+= form_with(model: trouble, local: true) do |form|
+  - if trouble.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(trouble.errors.count, "error")
+        prohibited this trouble from being saved:
+      %ul
+        - trouble.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :reference
+    = form.text_field :reference
+  .field
+    = form.label :solution
+    = form.text_field :solution
+  .field
+    = form.label :user_id
+    = form.number_field :user_id
+  .actions
+    = form.submit

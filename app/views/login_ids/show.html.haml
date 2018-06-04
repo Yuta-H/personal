@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Authenticate key:
+  = @login_id.authenticate_key
+%p
+  %strong Secret:
+  = @login_id.secret_id
+= link_to 'Edit', edit_login_id_path(@login_id)
+|
+= link_to 'Back', login_ids_path

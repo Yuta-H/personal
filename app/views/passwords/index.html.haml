@@ -1,0 +1,20 @@
+%p#notice= notice
+%h1 Passwords
+%table
+  %thead
+    %tr
+      %th Password
+      %th User
+      %th Secret
+      %th{:colspan => "3"}
+  %tbody
+    - @passwords.each do |password|
+      %tr
+        %td= password.password
+        %td= password.user_id
+        %td= password.secret_id
+        %td= link_to 'Show', password
+        %td= link_to 'Edit', edit_password_path(password)
+        %td= link_to 'Destroy', password, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Password', new_password_path

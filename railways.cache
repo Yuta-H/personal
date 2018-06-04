@@ -1,0 +1,71 @@
+                   Prefix Verb   URI Pattern                                                                              Controller#Action
+           sessions_index GET    /sessions/index(.:format)                                                                sessions#index
+                 statuses GET    /statuses(.:format)                                                                      statuses#index
+                          POST   /statuses(.:format)                                                                      statuses#create
+               new_status GET    /statuses/new(.:format)                                                                  statuses#new
+              edit_status GET    /statuses/:id/edit(.:format)                                                             statuses#edit
+                   status GET    /statuses/:id(.:format)                                                                  statuses#show
+                          PATCH  /statuses/:id(.:format)                                                                  statuses#update
+                          PUT    /statuses/:id(.:format)                                                                  statuses#update
+                          DELETE /statuses/:id(.:format)                                                                  statuses#destroy
+                 troubles GET    /troubles(.:format)                                                                      troubles#index
+                          POST   /troubles(.:format)                                                                      troubles#create
+              new_trouble GET    /troubles/new(.:format)                                                                  troubles#new
+             edit_trouble GET    /troubles/:id/edit(.:format)                                                             troubles#edit
+                  trouble GET    /troubles/:id(.:format)                                                                  troubles#show
+                          PATCH  /troubles/:id(.:format)                                                                  troubles#update
+                          PUT    /troubles/:id(.:format)                                                                  troubles#update
+                          DELETE /troubles/:id(.:format)                                                                  troubles#destroy
+               categories GET    /categories(.:format)                                                                    categories#index
+                          POST   /categories(.:format)                                                                    categories#create
+             new_category GET    /categories/new(.:format)                                                                categories#new
+            edit_category GET    /categories/:id/edit(.:format)                                                           categories#edit
+                 category GET    /categories/:id(.:format)                                                                categories#show
+                          PATCH  /categories/:id(.:format)                                                                categories#update
+                          PUT    /categories/:id(.:format)                                                                categories#update
+                          DELETE /categories/:id(.:format)                                                                categories#destroy
+                    tasks GET    /tasks(.:format)                                                                         tasks#index
+                          POST   /tasks(.:format)                                                                         tasks#create
+                 new_task GET    /tasks/new(.:format)                                                                     tasks#new
+                edit_task GET    /tasks/:id/edit(.:format)                                                                tasks#edit
+                     task GET    /tasks/:id(.:format)                                                                     tasks#show
+                          PATCH  /tasks/:id(.:format)                                                                     tasks#update
+                          PUT    /tasks/:id(.:format)                                                                     tasks#update
+                          DELETE /tasks/:id(.:format)                                                                     tasks#destroy
+                    users GET    /users(.:format)                                                                         users#index
+                          POST   /users(.:format)                                                                         users#create
+                 new_user GET    /users/new(.:format)                                                                     users#new
+                edit_user GET    /users/:id/edit(.:format)                                                                users#edit
+                     user GET    /users/:id(.:format)                                                                     users#show
+                          PATCH  /users/:id(.:format)                                                                     users#update
+                          PUT    /users/:id(.:format)                                                                     users#update
+                          DELETE /users/:id(.:format)                                                                     users#destroy
+                login_ids GET    /login_ids(.:format)                                                                     login_ids#index
+                          POST   /login_ids(.:format)                                                                     login_ids#create
+             new_login_id GET    /login_ids/new(.:format)                                                                 login_ids#new
+            edit_login_id GET    /login_ids/:id/edit(.:format)                                                            login_ids#edit
+                 login_id GET    /login_ids/:id(.:format)                                                                 login_ids#show
+                          PATCH  /login_ids/:id(.:format)                                                                 login_ids#update
+                          PUT    /login_ids/:id(.:format)                                                                 login_ids#update
+                          DELETE /login_ids/:id(.:format)                                                                 login_ids#destroy
+                  secrets GET    /secrets(.:format)                                                                       secrets#index
+                          POST   /secrets(.:format)                                                                       secrets#create
+               new_secret GET    /secrets/new(.:format)                                                                   secrets#new
+              edit_secret GET    /secrets/:id/edit(.:format)                                                              secrets#edit
+                   secret GET    /secrets/:id(.:format)                                                                   secrets#show
+                          PATCH  /secrets/:id(.:format)                                                                   secrets#update
+                          PUT    /secrets/:id(.:format)                                                                   secrets#update
+                          DELETE /secrets/:id(.:format)                                                                   secrets#destroy
+                passwords GET    /passwords(.:format)                                                                     passwords#index
+                          POST   /passwords(.:format)                                                                     passwords#create
+             new_password GET    /passwords/new(.:format)                                                                 passwords#new
+            edit_password GET    /passwords/:id/edit(.:format)                                                            passwords#edit
+                 password GET    /passwords/:id(.:format)                                                                 passwords#show
+                          PATCH  /passwords/:id(.:format)                                                                 passwords#update
+                          PUT    /passwords/:id(.:format)                                                                 passwords#update
+                          DELETE /passwords/:id(.:format)                                                                 passwords#destroy
+       rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
+rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
+       rails_disk_service GET    /rails/active_storage/disk/:encoded_key/*filename(.:format)                              active_storage/disk#show
+update_rails_disk_service PUT    /rails/active_storage/disk/:encoded_token(.:format)                                      active_storage/disk#update
+     rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create

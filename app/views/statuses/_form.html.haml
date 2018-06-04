@@ -1,0 +1,20 @@
+= form_with(model: status, local: true) do |form|
+  - if status.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(status.errors.count, "error")
+        prohibited this status from being saved:
+      %ul
+        - status.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :name
+    = form.text_field :name
+  .field
+    = form.label :task_id
+    = form.number_field :task_id
+  .field
+    = form.label :trouble_id
+    = form.number_field :trouble_id
+  .actions
+    = form.submit

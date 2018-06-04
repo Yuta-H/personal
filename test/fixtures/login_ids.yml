@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  authenticate_key: MyString
+  secret_id: 1
+
+two:
+  authenticate_key: MyString
+  secret_id: 1

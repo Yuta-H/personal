@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @status.name
+%p
+  %strong Task:
+  = @status.task_id
+%p
+  %strong Trouble:
+  = @status.trouble_id
+= link_to 'Edit', edit_status_path(@status)
+|
+= link_to 'Back', statuses_path

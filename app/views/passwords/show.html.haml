@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Password:
+  = @password.password
+%p
+  %strong User:
+  = @password.user_id
+%p
+  %strong Secret:
+  = @password.secret_id
+= link_to 'Edit', edit_password_path(@password)
+|
+= link_to 'Back', passwords_path
