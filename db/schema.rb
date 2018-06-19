@@ -12,58 +12,66 @@
 
 ActiveRecord::Schema.define(version: 2018_06_04_010659) do
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.integer "task_id"
+    t.bigint "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_categories_on_task_id"
   end
 
-  create_table "login_ids", force: :cascade do |t|
+  create_table "login_ids", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "authenticate_key"
-    t.integer "secret_id"
+    t.bigint "secret_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["secret_id"], name: "index_login_ids_on_secret_id"
   end
 
-  create_table "passwords", force: :cascade do |t|
+  create_table "passwords", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "password"
-    t.integer "user_id"
-    t.integer "secret_id"
+    t.bigint "user_id"
+    t.bigint "secret_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["secret_id"], name: "index_passwords_on_secret_id"
+    t.index ["user_id"], name: "index_passwords_on_user_id"
   end
 
-  create_table "secrets", force: :cascade do |t|
+  create_table "secrets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "place"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "statuses", force: :cascade do |t|
+  create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.integer "task_id"
-    t.integer "trouble_id"
+    t.bigint "task_id"
+    t.bigint "trouble_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_statuses_on_task_id"
+    t.index ["trouble_id"], name: "index_statuses_on_trouble_id"
   end
 
-  create_table "tasks", force: :cascade do |t|
+  create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "example"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
-  create_table "troubles", force: :cascade do |t|
+  create_table "troubles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "reference"
     t.string "solution"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_troubles_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

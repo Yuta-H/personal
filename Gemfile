@@ -6,7 +6,6 @@ ruby '2.5.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 
 gem 'mysql2'
 # Use Puma as the app server
@@ -41,6 +40,13 @@ gem 'rails-i18n'
 gem 'ransack'
 
 gem  'bcrypt', '~> 3.1.7'
+
+gem "haml-rails"
+
+gem 'seed-fu'
+
+# errorメッセージ日本語化
+gem 'rails-i18n'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
