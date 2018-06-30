@@ -47,6 +47,8 @@ gem 'seed-fu'
 
 gem 'devise'
 
+gem 'bootstrap-sass'
+
 # errorメッセージ日本語化
 gem 'rails-i18n'
 

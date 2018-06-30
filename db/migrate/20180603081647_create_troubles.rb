@@ -1,9 +1,9 @@
 class CreateTroubles < ActiveRecord::Migration[5.2]
   def change
     create_table :troubles do |t|
-      t.string :reference
+      t.string :url
+      t.string :example
       t.string :solution
-      t.references :user
 
       t.timestamps
     end

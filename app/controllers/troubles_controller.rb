@@ -1,5 +1,6 @@
 class TroublesController < ApplicationController
   before_action :set_trouble, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /troubles
   # GET /troubles.json

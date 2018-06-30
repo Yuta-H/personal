@@ -1,5 +1,7 @@
 class SecretsController < ApplicationController
   before_action :set_secret, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+
 
   # GET /secrets
   # GET /secrets.json

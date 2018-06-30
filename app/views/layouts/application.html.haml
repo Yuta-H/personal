@@ -8,4 +8,20 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    %header
+      %nav.navbar.navbar-default.navbar-static-top
+        .navbar-header
+          %a.navbar-brand
+            ='PERSONAL'
+        .container
+          %ul.nav.navbar-nav
+            %li= link_to 'タスク管理', tasks_path
+            %li= link_to 'トラブル管理', troubles_path
+            %li= link_to 'パスワード管理', secrets_path
+            - if user_signed_in?
+              %li= link_to 'ログアウト', destroy_user_session_path, method: :delete
+            - else
+              %li= link_to 'ログイン', new_user_session_path
+    %p.notice= notice
+    %p.alert= alert
     = yield

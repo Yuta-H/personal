@@ -10,50 +10,83 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_22_022514) do
+ActiveRecord::Schema.define(version: 2018_06_30_084218) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.bigint "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["task_id"], name: "index_categories_on_task_id"
   end
 
   create_table "secrets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "place"
+    t.string "password"
+    t.string "key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.bigint "task_id"
-    t.bigint "trouble_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["task_id"], name: "index_statuses_on_task_id"
-    t.index ["trouble_id"], name: "index_statuses_on_trouble_id"
+  end
+
+  create_table "task_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "task_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_task_categories_on_category_id"
+    t.index ["task_id"], name: "index_task_categories_on_task_id"
+  end
+
+  create_table "task_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "task_id"
+    t.bigint "status_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["status_id"], name: "index_task_statuses_on_status_id"
+    t.index ["task_id"], name: "index_task_statuses_on_task_id"
   end
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "example"
-    t.bigint "user_id"
+    t.string "name"
+    t.bigint "category_id"
+    t.boolean "delete_flg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_tasks_on_user_id"
+    t.index ["category_id"], name: "index_tasks_on_category_id"
+  end
+
+  create_table "trouble_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "trouble_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_trouble_categories_on_category_id"
+    t.index ["trouble_id"], name: "index_trouble_categories_on_trouble_id"
+  end
+
+  create_table "trouble_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "trouble_id"
+    t.bigint "status_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["status_id"], name: "index_trouble_statuses_on_status_id"
+    t.index ["trouble_id"], name: "index_trouble_statuses_on_trouble_id"
   end
 
   create_table "troubles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "reference"
+    t.string "url"
+    t.string "example"
     t.string "solution"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_troubles_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "username", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
