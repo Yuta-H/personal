@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :statuses
   resources :troubles
   resources :categories
-  resources :tasks
+  resources :tasks, except: :show
   resources :secrets
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

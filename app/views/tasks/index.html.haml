@@ -1,18 +1,32 @@
-%p#notice= notice
-%h1 Tasks
-%table
-  %thead
-    %tr
-      %th Example
-      %th User
-      %th{:colspan => "3"}
-  %tbody
-    - @tasks.each do |task|
+.container
+  %h2.col-6{style: 'height: 10vmin;'} タスク管理
+.container{style: 'height: 20vmin;'}
+  = search_form_for @search, url: tasks_url do |f|
+    .row.text-center
+      = f.label :category, "カテゴリ検索"
+      .div
+        = f.collection_select :category_id_eq, Category.all, :id, :name ,{class: "form-control"}
+        = button_to "検索", class: 'glyphicon glyphicon-search'
+.container{style: 'height: 20vmin;'}
+  %table
+    %colgroup
+      %col{style: 'width: 50%;'}
+      %col{style: 'width: 40%;'}
+      %col{style: 'width: 5%;'}
+      %col{style: 'width: 5%;'}
+    %thead
       %tr
-        %td= task.example
-        %td= task.user_id
-        %td= link_to 'Show', task
-        %td= link_to 'Edit', edit_task_path(task)
-        %td= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Task', new_task_path
+        %th カテゴリ
+        %th 課題名
+        %th 状態
+        %th{:colspan => "3"}
+    %tbody
+      - @tasks.each do |task|
+        %tr
+          %td= task.category.name
+          %td= task.name
+          %td= task.status.name
+          %td= link_to 'Edit', edit_task_path(task), class: 'glyphicon glyphicon-pencil'
+          %td= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash'
+  %br/
+  = link_to 'New Task', new_task_path

@@ -1,6 +1,4 @@
 class Category < ApplicationRecord
-  has_many :task_statuses
-  has_many :trouble_statuses
-  has_many :task
-  has_many :trouble
+  has_many :task_categories
+  has_many :trouble_categories
 end

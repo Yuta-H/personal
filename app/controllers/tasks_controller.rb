@@ -5,7 +5,14 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+
+    params[:q] ||= {}
+    p "~~~~~~~~~~~~ransack_param~~~~~~~~~~"
+    p params[:q]
+    @search = Task.ransack(params[:q])
+    p "~~~~~~~~~~~~ransack~~~~~~~~~~"
+    p @search
+    @tasks = @search.result(distinct: true)
   end
 
   # GET /tasks/1
@@ -29,11 +36,11 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
+        flash[:success] = "タスクを追加しました"
+        format.html { redirect_to tasks_url}
       else
+        flash.now[:error] = "タスクの追加に失敗しました"
         format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,7 +50,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -70,6 +77,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:example, :user_id)
+      params.require(:task).permit(:name, :category_id, :status_id)
     end
 end

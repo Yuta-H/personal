@@ -1,17 +1,11 @@
-= form_with(model: trouble, local: true) do |form|
-  - if trouble.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(trouble.errors.count, "error")
-        prohibited this trouble from being saved:
-      %ul
-        - trouble.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = form.label :reference
-    = form.text_field :reference
-  .field
-    = form.label :solution
-    = form.text_field :solution
-  .actions
-    = form.submit
+.field
+  = form.label :url
+  = form.text_field :url
+.field
+  = form.label :name
+  = form.text_field :name
+.field
+  = form.label :solution
+  = form.text_field :solution
+.actions
+  = form.submit

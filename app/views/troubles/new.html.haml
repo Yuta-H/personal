@@ -1,3 +1,4 @@
 %h1 New Trouble
-= render 'form', trouble: @trouble
-= link_to 'Back', troubles_path
+= form_for @trouble, url: troubles_url, method: :post do |form|
+    = render partial: 'form', locals: { form: form }
+    = link_to 'Back', troubles_path

@@ -8,11 +8,6 @@ class TroublesController < ApplicationController
     @troubles = Trouble.all
   end
 
-  # GET /troubles/1
-  # GET /troubles/1.json
-  def show
-  end
-
   # GET /troubles/new
   def new
     @trouble = Trouble.new
@@ -29,11 +24,11 @@ class TroublesController < ApplicationController
 
     respond_to do |format|
       if @trouble.save
-        format.html { redirect_to @trouble, notice: 'Trouble was successfully created.' }
-        format.json { render :show, status: :created, location: @trouble }
+        flash[:success] = "TODOを追加しました"
+        format.html { redirect_to troubles_url}
       else
+        flash.now[:error] = "TODOの追加に失敗しました"
         format.html { render :new }
-        format.json { render json: @trouble.errors, status: :unprocessable_entity }
       end
     end
   end
