@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+勉強用
 
-Things you may want to cover:
+- タスク管理
+- パスワード管理
+- ハマった箇所管理
 
-* Ruby version
+学習内容
 
-* System dependencies
+- アプリ開発
+- deviseでログイン機能を実装
 
-* Configuration
+目的
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- アプリ開発を行うにあたって遭遇するエラーに、対応するため
+- アプリ開発の基本的な流れを理解するため
