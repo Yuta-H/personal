@@ -30,7 +30,7 @@ class SecretsController < ApplicationController
 
     respond_to do |format|
       if @secret.save
-        format.html { redirect_to @secret, notice: 'Secret was successfully created.' }
+        format.html { redirect_to secrets_url, notice: 'Secret was successfully created.' }
         format.json { render :show, status: :created, location: @secret }
       else
         format.html { render :new }
@@ -71,6 +71,6 @@ class SecretsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def secret_params
-      params.require(:secret).permit(:place)
+      params.require(:secret).permit(:name, :password, :key)
     end
 end

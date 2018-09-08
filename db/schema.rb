@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2018_06_22_022514) do
   end
 
   create_table "secrets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "site_name"
+    t.string "name"
     t.string "password"
     t.string "key"
     t.datetime "created_at", null: false
