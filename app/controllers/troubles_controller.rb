@@ -5,7 +5,9 @@ class TroublesController < ApplicationController
   # GET /troubles
   # GET /troubles.json
   def index
-    @troubles = Trouble.all
+    params[:q] ||= {}
+    @search = Trouble.ransack(params[:q])
+    @troubles = @search.result(distinct: true)
   end
 
   # GET /troubles/new
@@ -38,7 +40,7 @@ class TroublesController < ApplicationController
   def update
     respond_to do |format|
       if @trouble.update(trouble_params)
-        format.html { redirect_to @trouble, notice: 'Trouble was successfully updated.' }
+        format.html { redirect_to troubles_url, notice: 'Trouble was successfully updated.' }
         format.json { render :show, status: :ok, location: @trouble }
       else
         format.html { render :edit }
@@ -65,6 +67,6 @@ class TroublesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trouble_params
-      params.require(:trouble).permit(:reference, :solution, :user_id)
+      params.require(:trouble).permit(:name, :url, :solution, :status_id, :category_id)
     end
 end

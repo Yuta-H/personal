@@ -1,11 +1,17 @@
 .field
-  = form.label :url
-  = form.text_field :url
-.field
-  = form.label :name
+  = form.label '内容'
   = form.text_field :name
 .field
-  = form.label :solution
+  = form.label '状態'
+  = form.collection_select :status_id, Status.all, :id, :name
+.field
+  = form.label 'カテゴリ'
+  = form.collection_select :category_id, Category.all, :id, :name
+.field
+  = form.label '解決策'
   = form.text_field :solution
+.field
+  = form.label '参考記事'
+  = form.text_field :url
 .actions
   = form.submit

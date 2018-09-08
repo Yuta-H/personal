@@ -1,4 +1,4 @@
 class Status < ApplicationRecord
-  has_many :task_statuses
-  has_many :trouble_statuses
+  has_many :tasks
+  has_many :troubles
 end
