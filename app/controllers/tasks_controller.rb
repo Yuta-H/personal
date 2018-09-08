@@ -5,13 +5,8 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-
     params[:q] ||= {}
-    p "~~~~~~~~~~~~ransack_param~~~~~~~~~~"
-    p params[:q]
     @search = Task.ransack(params[:q])
-    p "~~~~~~~~~~~~ransack~~~~~~~~~~"
-    p @search
     @tasks = @search.result(distinct: true)
   end
 
