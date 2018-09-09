@@ -1,0 +1,10 @@
+= form_for @category do |category_form|
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .field
+          = category_form.label "カテゴリ名"
+          = category_form.text_field :name
+      .modal-footer
+        .actions
+          = category_form.submit

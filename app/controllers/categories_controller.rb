@@ -2,12 +2,6 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
-  # GET /categories
-  # GET /categories.json
-  def index
-    @categories = Category.all
-  end
-
   # GET /categories/1
   # GET /categories/1.json
   def show
@@ -29,7 +23,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to @category, notice: 'Category was successfully created.' }
+        format.html {redirect_back(fallback_location: root_path, notice: 'SUCCESS!!')}
         format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new }
@@ -52,12 +46,16 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def delete_category_select
+    @categories = Category.all
+  end
+
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+      format.html { redirect_back(fallback_location: root_path, notice: 'SUCCESS!!') }
       format.json { head :no_content }
     end
   end
@@ -70,6 +68,6 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:name, :task_id)
+      params.require(:category).permit(:id, :name)
     end
 end

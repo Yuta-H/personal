@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :statuses
   resources :troubles
-  resources :categories
+  resources :categories, except: :index
+  get '/delete_category_select', to: 'categories#delete_category_select', as: 'delete_category_select'
   resources :tasks, except: :show
   resources :secrets
 
