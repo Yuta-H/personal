@@ -1,0 +1,8 @@
+= link_to 'カテゴリを追加', new_category_path, remote: true, class: "btn btn-lg btn-primary"
+#category-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+= link_to 'カテゴリを削除', delete_category_select_path, remote: true, class: "btn btn-lg btn-primary"
+#status-delete-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+= link_to 'ステータスを追加', new_status_path, remote: true, class: "btn btn-lg btn-primary"
+#status-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+= link_to 'ステータスを削除', delete_status_select_path, remote: true, class: "btn btn-lg btn-primary"
+#category-delete-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}

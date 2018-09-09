@@ -29,7 +29,7 @@ class StatusesController < ApplicationController
 
     respond_to do |format|
       if @status.save
-        format.html { redirect_to @status, notice: 'Status was successfully created.' }
+        format.html { redirect_back(fallback_location: root_path, notice: 'SUCCESS!!') }
         format.json { render :show, status: :created, location: @status }
       else
         format.html { render :new }
@@ -52,12 +52,16 @@ class StatusesController < ApplicationController
     end
   end
 
+  def delete_status_select
+    @statuses = Status.all
+  end
+
   # DELETE /statuses/1
   # DELETE /statuses/1.json
   def destroy
     @status.destroy
     respond_to do |format|
-      format.html { redirect_to statuses_url, notice: 'Status was successfully destroyed.' }
+      format.html { redirect_back(fallback_location: root_path, notice: 'SUCCESS!!') }
       format.json { head :no_content }
     end
   end
