@@ -3,10 +3,10 @@
   = form.text_field :name
 .field
   = form.label '状態'
-  = form.collection_select :status_id, Status.all, :id, :name
+  = form.collection_select :status_id, Status.branch_troubles, :id, :name
 .field
   = form.label 'カテゴリ'
-  = form.collection_select :category_id, Category.all, :id, :name
+  = form.collection_select :category_id, Category.branch_troubles, :id, :name
 .field
   = form.label '解決策'
   = form.text_field :solution

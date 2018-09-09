@@ -31,14 +31,14 @@
                           PATCH  /troubles/:id(.:format)                                                                  troubles#update
                           PUT    /troubles/:id(.:format)                                                                  troubles#update
                           DELETE /troubles/:id(.:format)                                                                  troubles#destroy
-               categories GET    /categories(.:format)                                                                    categories#index
-                          POST   /categories(.:format)                                                                    categories#create
+               categories POST   /categories(.:format)                                                                    categories#create
              new_category GET    /categories/new(.:format)                                                                categories#new
             edit_category GET    /categories/:id/edit(.:format)                                                           categories#edit
                  category GET    /categories/:id(.:format)                                                                categories#show
                           PATCH  /categories/:id(.:format)                                                                categories#update
                           PUT    /categories/:id(.:format)                                                                categories#update
                           DELETE /categories/:id(.:format)                                                                categories#destroy
+   delete_category_select GET    /delete_category_select(.:format)                                                        categories#delete_category_select
                     tasks GET    /tasks(.:format)                                                                         tasks#index
                           POST   /tasks(.:format)                                                                         tasks#create
                  new_task GET    /tasks/new(.:format)                                                                     tasks#new

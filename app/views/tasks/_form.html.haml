@@ -1,11 +1,11 @@
 .field
-  = form.label :name
+  = form.label 'タスク名'
   = form.text_field :name
 .field
-  = form.label :category
-  = form.collection_select :category_id, Category.all, :id, :name
+  = form.label 'カテゴリ'
+  = form.collection_select :category_id, Category.branch_tasks, :id, :name
 .field
-  = form.label :status
-  = form.collection_select :status_id, Status.all, :id, :name
+  = form.label 'ステータス'
+  = form.collection_select :status_id, Status.branch_tasks, :id, :name
 .actions
   = form.submit

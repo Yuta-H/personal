@@ -1,0 +1,16 @@
+.modal-dialog
+  .modal-content
+    .modal-body
+      %table
+        %colgroup
+          %col{style: 'width: 70%;'}
+          %col{style: 'width: 30%;'}
+        %thead
+          %tr
+            %th
+            %th
+        %tbody
+          - @categories.each do |category|
+            %tr
+              %td= category.name
+              %td= link_to '削除', category_path(category.id), method: :delete, data: { confirm: 'Are you sure?' }

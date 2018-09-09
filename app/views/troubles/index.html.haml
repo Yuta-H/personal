@@ -1,11 +1,11 @@
 .container
   %h2.col-6{style: 'height: 10vmin;'} トラブル管理
 .container{style: 'height: 20vmin;'}
-  = search_form_for @search, url: tasks_url do |f|
+  = search_form_for @search, url: troubles_url do |f|
     .row.text-center
       = f.label :category, "カテゴリ検索"
       .div
-        = f.collection_select :category_id_eq, Category.all, :id, :name ,{class: "form-control"}
+        = f.collection_select :category_id_eq, Category.branch_troubles, :id, :name ,{class: "form-control"}
         = button_to "検索", class: 'glyphicon glyphicon-search'
 .container{style: 'height: 20vmin;'}
   %table
@@ -35,4 +35,4 @@
           %td= link_to 'Edit', edit_trouble_path(trouble), class: 'glyphicon glyphicon-pencil'
           %td= link_to 'Destroy', trouble, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash'
   %br/
-  = link_to 'New Trouble', new_trouble_path
+  = link_to '課題を追加する', new_trouble_path

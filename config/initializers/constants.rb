@@ -1,0 +1,4 @@
+module Constants
+  TASKS_CLASSIFICATION = 1
+  TROUBLES_CLASSIFICATION = 2
+end

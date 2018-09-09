@@ -1,4 +1,5 @@
-%h1 New Trouble
+%h1 課題を追加
+= render partial: 'shared/option'
 = form_for @trouble, url: troubles_url, method: :post do |form|
     = render partial: 'form', locals: { form: form }
-    = link_to 'Back', troubles_path
+    = link_to '戻る', troubles_path

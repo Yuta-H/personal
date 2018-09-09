@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2018_06_22_022514) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
+    t.integer "classification"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -28,6 +29,7 @@ ActiveRecord::Schema.define(version: 2018_06_22_022514) do
 
   create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
+    t.integer "classification"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

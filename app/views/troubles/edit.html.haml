@@ -1,5 +1,5 @@
 %h1 Editing Trouble
 = form_for @trouble, url: trouble_url, method: :put do |form|
-  = render 'form', trouble: @trouble
+  = render partial: 'form', locals: { form: form }
 = link_to 'Show', @trouble
 = link_to 'Back', troubles_path

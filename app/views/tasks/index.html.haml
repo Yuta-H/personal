@@ -5,7 +5,7 @@
     .row.text-center
       = f.label :category, "カテゴリ検索"
       .div
-        = f.collection_select :category_id_eq, Category.all, :id, :name ,{class: "form-control"}
+        = f.collection_select :category_id_eq, Category.branch_tasks, :id, :name ,{class: "form-control"}
         = button_to "検索", class: 'glyphicon glyphicon-search'
 .container{style: 'height: 20vmin;'}
   %table
@@ -29,4 +29,4 @@
           %td= link_to 'Edit', edit_task_path(task), class: 'glyphicon glyphicon-pencil'
           %td= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash'
   %br/
-  = link_to 'New Task', new_task_path
+  = link_to 'タスクを追加する', new_task_path

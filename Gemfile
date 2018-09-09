@@ -49,6 +49,10 @@ gem 'devise'
 
 gem 'bootstrap-sass'
 
+gem 'jquery-rails'
+
+gem 'bootstrap', '~> 4.1.1'
+
 # errorメッセージ日本語化
 gem 'rails-i18n'
 
