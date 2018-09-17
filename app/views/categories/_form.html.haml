@@ -5,6 +5,7 @@
         .field
           = category_form.label "カテゴリ名"
           = category_form.text_field :name
+          = category_form.hidden_field :classification, value: params[:classification]
       .modal-footer
         .actions
           = category_form.submit

@@ -1,32 +1,47 @@
+#category-delete-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+#category-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+#status-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+#status-delete-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+#task-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+.container
+  = form_for @variable_task, url: tasks_url, method: :post, html: {class: "form-inline"} do |form|
+    = render partial: 'form', locals: { form: form }
+
 .container
   %h2.col-6{style: 'height: 10vmin;'} タスク管理
-.container{style: 'height: 20vmin;'}
-  = search_form_for @search, url: tasks_url do |f|
+.container{style: 'height: 15vmin;'}
+  = search_form_for @search, url: tasks_url, html: {class: "form-inline"} do |f|
     .row.text-center
       = f.label :category, "カテゴリ検索"
       .div
-        = f.collection_select :category_id_eq, Category.branch_tasks, :id, :name ,{class: "form-control"}
-        = button_to "検索", class: 'glyphicon glyphicon-search'
+        .col-md-2.col-md-offset-5
+          .form-group
+            = f.collection_select :category_id_eq, Category.branch_tasks, :id, :name , {}, {class: "form-control"}
+            = button_tag "検索", {class: 'btn btn-primary'}
 .container{style: 'height: 20vmin;'}
-  %table
-    %colgroup
-      %col{style: 'width: 50%;'}
-      %col{style: 'width: 40%;'}
-      %col{style: 'width: 5%;'}
-      %col{style: 'width: 5%;'}
-    %thead
-      %tr
-        %th カテゴリ
-        %th 課題名
-        %th 状態
-        %th{:colspan => "3"}
-    %tbody
-      - @tasks.each do |task|
+  = form_tag delete_tasks_path, method: :delete do
+    %table.table.table-hover
+      %colgroup
+        %col{style: 'width: 14%;'}
+        %col{style: 'width: 30%;'}
+        %col{style: 'width: 30%;'}
+        %col{style: 'width: 8%;'}
+        %col{style: 'width: 8%;'}
+        %col{style: 'width: 8%;'}
+      %thead
         %tr
-          %td= task.category.name
-          %td= task.name
-          %td= task.status.name
-          %td= link_to 'Edit', edit_task_path(task), class: 'glyphicon glyphicon-pencil'
-          %td= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash'
-  %br/
-  = link_to 'タスクを追加する', new_task_path
+          %th 達成
+          %th カテゴリ
+          %th 課題名
+          %th 状態
+          %th{:colspan => "3"}
+      %tbody
+        - @tasks.each do |task|
+          %tr
+            %td= check_box_tag('delete_ids[]', task.id)
+            %td= task.category.name
+            %td= task.name
+            %td= task.status.name
+            %td= link_to '編集', edit_task_path(task), remote: true, class: 'glyphicon glyphicon-pencil'
+            %td= link_to '削除', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash'
+    = submit_tag 'まとめて削除', class: 'btn btn-danger'

@@ -3,14 +3,17 @@
     .modal-body
       %table
         %colgroup
-          %col{style: 'width: 70%;'}
-          %col{style: 'width: 30%;'}
+          %col{style: 'width: 50%;'}
+          %col{style: 'width: 40%;'}
+          %col{style: 'width: 10%;'}
         %thead
           %tr
             %th
             %th
         %tbody
-          - @statuses.each do |status|
+          %h3 ステータス 削除
+          - @statuses.order(classification: :desc).each do |status|
             %tr
+              %td= status.classification == Constants::TASKS_CLASSIFICATION ? "タスク" : "トラブル"
               %td= status.name
               %td= link_to '削除', status_path(status.id), method: :delete, data: { confirm: 'Are you sure?' }

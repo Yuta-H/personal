@@ -1,11 +1,15 @@
-.field
+.field.form-group
   = form.label 'タスク名'
-  = form.text_field :name
-.field
+  .div
+    = form.text_field :name, class: 'form-control'
+.field.form-group
   = form.label 'カテゴリ'
-  = form.collection_select :category_id, Category.branch_tasks, :id, :name
-.field
+  .div
+    = form.collection_select :category_id, Category.branch_tasks, :id, :name, {}, {class: "form-control"}
+.field.form-group
   = form.label 'ステータス'
-  = form.collection_select :status_id, Status.branch_tasks, :id, :name
-.actions
-  = form.submit
+  .div
+    = form.collection_select :status_id, Status.branch_tasks, :id, :name, {}, {class: "form-control"}
+.field.form-group
+  %br
+    = form.submit class: "btn btn-success"

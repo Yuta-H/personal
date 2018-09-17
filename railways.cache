@@ -23,6 +23,7 @@
                           PATCH  /statuses/:id(.:format)                                                                  statuses#update
                           PUT    /statuses/:id(.:format)                                                                  statuses#update
                           DELETE /statuses/:id(.:format)                                                                  statuses#destroy
+     delete_status_select GET    /delete_status_select(.:format)                                                          statuses#delete_status_select
                  troubles GET    /troubles(.:format)                                                                      troubles#index
                           POST   /troubles(.:format)                                                                      troubles#create
               new_trouble GET    /troubles/new(.:format)                                                                  troubles#new
@@ -46,6 +47,7 @@
                      task PATCH  /tasks/:id(.:format)                                                                     tasks#update
                           PUT    /tasks/:id(.:format)                                                                     tasks#update
                           DELETE /tasks/:id(.:format)                                                                     tasks#destroy
+             delete_tasks DELETE /delete_tasks(.:format)                                                                  tasks#delete_tasks
                   secrets GET    /secrets(.:format)                                                                       secrets#index
                           POST   /secrets(.:format)                                                                       secrets#create
                new_secret GET    /secrets/new(.:format)                                                                   secrets#new
