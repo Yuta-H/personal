@@ -2,7 +2,7 @@
 #category-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
 #status-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
 #status-delete-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
-#task-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+#trouble-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
 .container
   = form_for @variable_trouble, url: troubles_url, method: :post, html: {class: "form-inline"} do |form|
     = render partial: 'form', locals: { form: form }
@@ -22,21 +22,27 @@
   %table.table.table-hover
     %colgroup
       %col{style: 'width: 14%;'}
-      %col{style: 'width: 30%;'}
-      %col{style: 'width: 30%;'}
+      %col{style: 'width: 10%;'}
+      %col{style: 'width: 10%;'}
+      %col{style: 'width: 20%;'}
+      %col{style: 'width: 20%;'}
       %col{style: 'width: 8%;'}
       %col{style: 'width: 8%;'}
     %thead
       %tr
-        %th カテゴリ
-        %th 課題名
+        %th 内容
         %th 状態
+        %th カテゴリ
+        %th 解決策
+        %th 参考記事
         %th{:colspan => "3"}
     %tbody
       - @troubles.each do |trouble|
         %tr
-          %td= trouble.category.name
           %td= trouble.name
           %td= trouble.status.name
-          %td= link_to '編集', edit_task_path(trouble), remote: true, class: 'glyphicon glyphicon-pencil'
+          %td= trouble.category.name
+          %td= trouble.solution
+          %td= trouble.url
+          %td= link_to '編集', edit_trouble_path(trouble), remote: true, class: 'glyphicon glyphicon-pencil'
           %td= link_to '削除', trouble, method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash'

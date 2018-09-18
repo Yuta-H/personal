@@ -1,5 +1,5 @@
 class TroublesController < ApplicationController
-  before_action :set_trouble, only: [:show, :edit, :update, :destroy]
+  before_action :set_trouble, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
 
   # GET /troubles
@@ -9,11 +9,6 @@ class TroublesController < ApplicationController
     @search = Trouble.ransack(params[:q])
     @troubles = @search.result(distinct: true)
     @variable_trouble = Trouble.new
-  end
-
-  # GET /troubles/new
-  def new
-    @trouble = Trouble.new
   end
 
   # GET /troubles/1/edit
@@ -53,7 +48,7 @@ class TroublesController < ApplicationController
   # DELETE /troubles/1
   # DELETE /troubles/1.json
   def destroy
-    @trouble.destroy
+    @variable_trouble.destroy
     respond_to do |format|
       format.html { redirect_to troubles_url, notice: 'Trouble was successfully destroyed.' }
       format.json { head :no_content }
