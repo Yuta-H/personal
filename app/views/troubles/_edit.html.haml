@@ -1,0 +1,6 @@
+.modal-dialog
+  .modal-content
+    .modal-body
+      .field.form-group
+        = form_for @variable_trouble, url: trouble_url, method: :put do |form|
+          = render partial: 'form', locals: { form: form }

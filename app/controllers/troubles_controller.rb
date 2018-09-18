@@ -8,6 +8,7 @@ class TroublesController < ApplicationController
     params[:q] ||= {}
     @search = Trouble.ransack(params[:q])
     @troubles = @search.result(distinct: true)
+    @variable_trouble = Trouble.new
   end
 
   # GET /troubles/new
@@ -22,10 +23,10 @@ class TroublesController < ApplicationController
   # POST /troubles
   # POST /troubles.json
   def create
-    @trouble = Trouble.new(trouble_params)
+    @variable_trouble = Trouble.new(trouble_params)
 
     respond_to do |format|
-      if @trouble.save
+      if @variable_trouble.save
         flash[:success] = "TODOを追加しました"
         format.html { redirect_to troubles_url}
       else
@@ -39,7 +40,7 @@ class TroublesController < ApplicationController
   # PATCH/PUT /troubles/1.json
   def update
     respond_to do |format|
-      if @trouble.update(trouble_params)
+      if @variable_trouble.update(trouble_params)
         format.html { redirect_to troubles_url, notice: 'Trouble was successfully updated.' }
         format.json { render :show, status: :ok, location: @trouble }
       else
@@ -62,7 +63,7 @@ class TroublesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_trouble
-      @trouble = Trouble.find(params[:id])
+      @variable_trouble = Trouble.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
