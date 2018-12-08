@@ -54,7 +54,7 @@ $(document).on('turbolinks:load',function(){
                 {{/is_show}}
               </td>
               <td class="actions">
-                {{#is_show}}<input type="submit" id="secret-submit" class="submit" data-id="{{id}}" value="更新" >{{/is_show}}
+                {{#is_show}}<a id="secret-submit" class="submit glyphicon glyphicon-ok" data-id="{{id}}" style="top:10px">{{/is_show}}
               </td>
             </tr>
             `;
