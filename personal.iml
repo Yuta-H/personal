@@ -607,6 +607,17 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
+      <library name="mustache-js-rails (vbundled(2.3.0.1)) [path][gem]">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.5.0/gems/mustache-js-rails-2.3.0.1/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.5.0/gems/mustache-js-rails-2.3.0.1/lib" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="mysql2 (vbundled(0.5.1)) [path][gem]">
         <CLASSES>
           <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.5.0/gems/mysql2-0.5.1/lib" />

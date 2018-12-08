@@ -16,4 +16,7 @@
 //= require jquery3
 //= require bootstrap
 //= require bootstrap-sprockets
+//= require mustache
+//= require jquery.mustache
+//= require jquery_ujs
 //= require_tree .

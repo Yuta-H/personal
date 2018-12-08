@@ -1,11 +1,13 @@
 class SecretsController < ApplicationController
-  before_action :set_secret, only: [:show, :edit, :update, :destroy]
+  before_action :set_secret, only: [:show, :edit, :destroy]
   before_action :authenticate_user!
+  include SecretsHelper
 
 
   # GET /secrets
   # GET /secrets.json
   def index
+    @variable_secret = Secret.new
     @secrets = Secret.all
   end
 
@@ -42,14 +44,11 @@ class SecretsController < ApplicationController
   # PATCH/PUT /secrets/1
   # PATCH/PUT /secrets/1.json
   def update
-    respond_to do |format|
-      if @secret.update(secret_params)
-        format.html { redirect_to @secret, notice: 'Secret was successfully updated.' }
-        format.json { render :show, status: :ok, location: @secret }
-      else
-        format.html { render :edit }
-        format.json { render json: @secret.errors, status: :unprocessable_entity }
-      end
+    @secret = Secret.find(secret_params['id'])
+    if @secret.update(secret_params)
+      redirect_back(fallback_location: secrets_url)
+    else
+      render :index
     end
   end
 
@@ -71,6 +70,6 @@ class SecretsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def secret_params
-      params.require(:secret).permit(:name, :password, :key)
+      params.require(:secret).permit(:id, :name, :password, :key)
     end
 end
