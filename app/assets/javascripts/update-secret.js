@@ -1,5 +1,5 @@
 $(function(){
-    $(document).on('click', '.actions input#secret-submit', function (event) {
+    $(document).on('click', '.actions #secret-submit', function (event) {
         $.ajax({
             type: "PUT",
             url: '/secrets/update',

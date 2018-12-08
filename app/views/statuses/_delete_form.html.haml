@@ -1,7 +1,7 @@
 .modal-dialog
   .modal-content
     .modal-body
-      %table
+      %table.table.table-hover
         %colgroup
           %col{style: 'width: 50%;'}
           %col{style: 'width: 40%;'}
@@ -16,4 +16,4 @@
             %tr
               %td= status.classification == Constants::TASKS_CLASSIFICATION ? "タスク" : "トラブル"
               %td= status.name
-              %td= link_to '削除', status_path(status.id), method: :delete, data: { confirm: 'Are you sure?' }
+              %td= link_to '', status_path(status.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash'

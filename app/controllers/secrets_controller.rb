@@ -32,10 +32,12 @@ class SecretsController < ApplicationController
 
     respond_to do |format|
       if @secret.save
-        format.html { redirect_to secrets_url, notice: 'Secret was successfully created.' }
+        format.html { redirect_to secrets_url, notice: 'パスワード情報を追加しました' }
         format.json { render :show, status: :created, location: @secret }
       else
-        format.html { render :new }
+        @variable_secret = Secret.new
+        @secrets = Secret.all
+        format.html { redirect_to secrets_url, notice: 'パスワード情報追加に失敗しました' }
         format.json { render json: @secret.errors, status: :unprocessable_entity }
       end
     end
@@ -58,7 +60,7 @@ class SecretsController < ApplicationController
   def destroy
     @secret.destroy
     respond_to do |format|
-      format.html { redirect_to secrets_url, notice: 'Secret was successfully destroyed.' }
+      format.html { redirect_to secrets_url, notice: 'パスワード情報を削除しました' }
       format.json { head :no_content }
     end
   end

@@ -1,5 +1,5 @@
 class TroublesController < ApplicationController
-  before_action :set_trouble, only: [:edit, :update, :destroy]
+  before_action :set_trouble, only: [:edit, :update, :destroy, :show]
   before_action :authenticate_user!
 
   # GET /troubles
@@ -15,6 +15,9 @@ class TroublesController < ApplicationController
   def edit
   end
 
+  def show
+  end
+
   # POST /troubles
   # POST /troubles.json
   def create
@@ -22,10 +25,8 @@ class TroublesController < ApplicationController
 
     respond_to do |format|
       if @variable_trouble.save
-        flash[:success] = "TODOを追加しました"
-        format.html { redirect_to troubles_url}
+        format.html { redirect_to troubles_url, notice: 'トラブルを追加しました' }
       else
-        flash.now[:error] = "TODOの追加に失敗しました"
         format.html { render :new }
       end
     end
@@ -36,7 +37,7 @@ class TroublesController < ApplicationController
   def update
     respond_to do |format|
       if @variable_trouble.update(trouble_params)
-        format.html { redirect_to troubles_url, notice: 'Trouble was successfully updated.' }
+        format.html { redirect_to troubles_url, notice: 'トラブルを更新しました' }
         format.json { render :show, status: :ok, location: @trouble }
       else
         format.html { render :edit }
@@ -50,7 +51,7 @@ class TroublesController < ApplicationController
   def destroy
     @variable_trouble.destroy
     respond_to do |format|
-      format.html { redirect_to troubles_url, notice: 'Trouble was successfully destroyed.' }
+      format.html { redirect_to troubles_url, notice: 'トラブルを削除しました' }
       format.json { head :no_content }
     end
   end

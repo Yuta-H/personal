@@ -1,0 +1,19 @@
+.modal-dialog
+  .modal-content
+    .modal-body
+      .field.form-group
+        - unless @variable_trouble.name.blank?
+          %h2 内容
+          = @variable_trouble.name
+        - unless @variable_trouble.status.name.blank?
+          %h2 状態
+          = @variable_trouble.status.name
+        - unless @variable_trouble.category.name.blank?
+          %h2 カテゴリ
+          = @variable_trouble.category.name
+        - unless @variable_trouble.solution.blank?
+          %h2 解決策
+          = @variable_trouble.solution
+        - unless @variable_trouble.url.blank?
+          %h2 参考記事
+          = @variable_trouble.url
