@@ -1,9 +1,6 @@
-$(function(){
+$(document).on('turbolinks:load',function(){
     $('.secret-action').on('click', function (event) {
-        console.log("aaaaaaaaa");
         secretData = JSON.parse(event.target.dataset.secret);
-        decryptPass = event.target.dataset.password;
-        isShow = JSON.parse(event.target.dataset.isShow);
         if ($('.add-secret-row').is(':visible')) {
             $(`tr[add-data-row='${secretData.id}']`).remove();
         } else {
@@ -11,9 +8,9 @@ $(function(){
                 id: secretData.id,
                 name: secretData.name,
                 key: secretData.key,
-                password: decryptPass,
-                is_show: isShow
-            },
+                password: event.target.dataset.password,
+                is_show: JSON.parse(event.target.dataset.isShow)
+            };
 
                 template = `
             <tr class="add-secret-row" add-data-row={{id}}>

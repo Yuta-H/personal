@@ -45,10 +45,11 @@ class SecretsController < ApplicationController
   # PATCH/PUT /secrets/1.json
   def update
     @secret = Secret.find(secret_params['id'])
-    if @secret.update(secret_params)
-      redirect_back(fallback_location: secrets_url)
-    else
-      render :index
+    respond_to do |format|
+      if @secret.update(secret_params)
+        format.html { redirect_to secrets_path }
+        format.js { render :index }
+      end
     end
   end
 

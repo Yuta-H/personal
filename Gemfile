@@ -55,6 +55,8 @@ gem 'bootstrap', '~> 4.1.1'
 
 gem 'mustache-js-rails'
 
+gem 'jquery-turbolinks'
+
 # errorメッセージ日本語化
 gem 'rails-i18n'
 
