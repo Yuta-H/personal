@@ -1,12 +1,11 @@
 $(function(){
     $(document).on('click', '.actions input#secret-submit', function (event) {
-        secretId = JSON.parse(event.target.dataset.id);
         $.ajax({
             type: "PUT",
             url: '/secrets/update',
             data: {
                 secret: {
-                    id: secretId,
+                    id: JSON.parse(event.target.dataset.id),
                     name: document.getElementById("secret-name").value,
                     key: document.getElementById("secret-key").value,
                     password: document.getElementById("secret-password").value
@@ -21,7 +20,6 @@ $(function(){
                 console.log("textStatus     : " + textStatus);
                 console.log("errorThrown    : " + errorThrown.message);
             },
-            dataType: 'json',
         });
     })
 });
