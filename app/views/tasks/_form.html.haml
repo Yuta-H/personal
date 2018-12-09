@@ -1,7 +1,10 @@
 .field.form-group
   = form.label 'タスク名'
   .div
-    = form.text_field :name, class: 'form-control'
+    - if @variable_task.new_record?
+      = form.text_field :name, class: 'form-control'
+    - else
+      = form.text_field :name, class: 'form-control', required: true
 .field.form-group
   = form.label 'カテゴリ'
   .div

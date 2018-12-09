@@ -5,9 +5,7 @@ class TroublesController < ApplicationController
   # GET /troubles
   # GET /troubles.json
   def index
-    params[:q] ||= {}
-    @search = Trouble.ransack(params[:q])
-    @troubles = @search.result(distinct: true)
+    set_search_troubles
     @variable_trouble = Trouble.new
   end
 
@@ -28,8 +26,9 @@ class TroublesController < ApplicationController
         flash[:success] = 'トラブルを追加しました'
         format.html { redirect_to troubles_url }
       else
+        set_search_troubles
         flash[:danger] = 'トラブル追加に失敗しました'
-        format.html { render :new }
+        format.html { render :index }
       end
     end
   end
@@ -43,6 +42,7 @@ class TroublesController < ApplicationController
         format.html { redirect_to troubles_url }
         format.json { render :show, status: :ok, location: @trouble }
       else
+        set_search_troubles
         flash[:danger] = 'トラブル更新に失敗しました'
         format.html { render :edit }
         format.json { render json: @trouble.errors, status: :unprocessable_entity }
@@ -59,6 +59,12 @@ class TroublesController < ApplicationController
       format.html { redirect_to troubles_url }
       format.json { head :no_content }
     end
+  end
+
+  def set_search_troubles
+    params[:q] ||= {}
+    @search = Trouble.ransack(params[:q])
+    @troubles = @search.result(distinct: true)
   end
 
   private

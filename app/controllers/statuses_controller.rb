@@ -34,7 +34,7 @@ class StatusesController < ApplicationController
         format.json { render :show, status: :created, location: @status }
       else
         flash[:danger] = 'ステータス追加に失敗しました'
-        format.html { render :new }
+        format.html { render :index }
         format.json { render json: @status.errors, status: :unprocessable_entity }
       end
     end
@@ -50,7 +50,7 @@ class StatusesController < ApplicationController
         format.json { render :show, status: :ok, location: @status }
       else
         flash[:danger] = 'ステータス更新に失敗しました'
-        format.html { render :edit }
+        format.html { render :index }
         format.json { render json: @status.errors, status: :unprocessable_entity }
       end
     end

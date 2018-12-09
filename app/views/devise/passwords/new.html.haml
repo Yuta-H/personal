@@ -1,0 +1,13 @@
+.login
+  .login-triangle
+  %h2.login-header Forgot your password?
+  %form.login-container
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      = devise_error_messages!
+      .field
+        = f.label :email
+        %br/
+        = f.email_field :email, autofocus: true, autocomplete: "email"
+      .actions
+        = f.submit "reset password!!"
+    = render "devise/shared/links"

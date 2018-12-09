@@ -7,7 +7,8 @@
 .container
   = form_for @variable_trouble, url: troubles_url, method: :post, html: {class: "form-inline"} do |form|
     = render partial: 'form', locals: { form: form }
-
+  - @variable_trouble.errors.full_messages.each do |message|
+    = message
 .container
   %h2.col-6{style: 'height: 10vmin;'} トラブル管理
 .container{style: 'height: 15vmin;'}

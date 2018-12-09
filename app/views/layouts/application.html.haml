@@ -44,5 +44,4 @@
               = link_to 'TRST', delete_status_select_path, remote: true, class: "glyphicon glyphicon-trash unit", title: "ステータス削除"
     - flash.each do |message_type, message|
       %div{:class => "alert alert-#{message_type}"}= message
-    %p.alert= alert
     = yield
