@@ -25,8 +25,10 @@ class TroublesController < ApplicationController
 
     respond_to do |format|
       if @variable_trouble.save
-        format.html { redirect_to troubles_url, notice: 'トラブルを追加しました' }
+        flash[:success] = 'トラブルを追加しました'
+        format.html { redirect_to troubles_url }
       else
+        flash[:danger] = 'トラブル追加に失敗しました'
         format.html { render :new }
       end
     end
@@ -37,9 +39,11 @@ class TroublesController < ApplicationController
   def update
     respond_to do |format|
       if @variable_trouble.update(trouble_params)
-        format.html { redirect_to troubles_url, notice: 'トラブルを更新しました' }
+        flash[:success] = 'トラブルを更新しました'
+        format.html { redirect_to troubles_url }
         format.json { render :show, status: :ok, location: @trouble }
       else
+        flash[:danger] = 'トラブル更新に失敗しました'
         format.html { render :edit }
         format.json { render json: @trouble.errors, status: :unprocessable_entity }
       end
@@ -51,7 +55,8 @@ class TroublesController < ApplicationController
   def destroy
     @variable_trouble.destroy
     respond_to do |format|
-      format.html { redirect_to troubles_url, notice: 'トラブルを削除しました' }
+      flash[:danger] = 'トラブルを削除しました'
+      format.html { redirect_to troubles_url }
       format.json { head :no_content }
     end
   end

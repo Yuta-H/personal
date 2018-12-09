@@ -23,9 +23,11 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
+        flash[:success] = 'カテゴリーを追加しました'
         format.html {redirect_back(fallback_location: root_path, notice: 'カテゴリーを追加しました')}
         format.json { render :show, status: :created, location: @category }
       else
+        flash[:danger] = 'カテゴリー追加に失敗しました'
         format.html { render :new }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
@@ -37,9 +39,11 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to @category, notice: 'カテゴリーを更新しました' }
+        flash[:success] = 'カテゴリーを更新しました'
+        format.html { redirect_to @category }
         format.json { render :show, status: :ok, location: @category }
       else
+        flash[:danger] = 'カテゴリー更新に失敗しました'
         format.html { render :edit }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
@@ -55,7 +59,8 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_back(fallback_location: root_path, notice: 'カテゴリーを削除しました') }
+      flash[:danger] = 'カテゴリーを削除しました'
+      format.html { redirect_back(fallback_location: root_path ) }
       format.json { head :no_content }
     end
   end

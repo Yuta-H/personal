@@ -31,8 +31,10 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @variable_task.save
-        format.html { redirect_to tasks_url, notice: 'タスクを追加しました'}
+        flash[:success] = 'タスクを追加しました'
+        format.html { redirect_to tasks_url }
       else
+        flash[:danger] = 'タスク追加に失敗しました'
         format.html { render :new }
       end
     end
@@ -43,9 +45,11 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @variable_task.update(task_params)
-        format.html { redirect_to tasks_path, notice: 'タスクを更新しました' }
+        flash[:success] = 'タスクを更新しました'
+        format.html { redirect_to tasks_path }
         format.json { render :show, status: :ok, location: @task }
       else
+        flash[:danger] = 'タスク更新に失敗しました'
         format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
@@ -57,6 +61,7 @@ class TasksController < ApplicationController
   def destroy
     @variable_task.destroy
     respond_to do |format|
+      flash[:danger] = 'タスクを削除しました'
       format.html { redirect_to tasks_url, notice: 'タスクを削除しました' }
       format.json { head :no_content }
     end
@@ -65,7 +70,8 @@ class TasksController < ApplicationController
   def delete_tasks
     Task.where("id in (?)", params[:delete_ids]).destroy_all
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'タスクを削除しました' }
+      flash[:danger] = 'タスクを削除しました'
+      format.html { redirect_to tasks_url }
       format.json { head :no_content }
     end
 

@@ -29,9 +29,11 @@ class StatusesController < ApplicationController
 
     respond_to do |format|
       if @status.save
-        format.html { redirect_back(fallback_location: root_path, notice: 'ステータスを追加しました') }
+        flash[:success] = 'ステータスを追加しました'
+        format.html { redirect_back(fallback_location: root_path ) }
         format.json { render :show, status: :created, location: @status }
       else
+        flash[:danger] = 'ステータス追加に失敗しました'
         format.html { render :new }
         format.json { render json: @status.errors, status: :unprocessable_entity }
       end
@@ -43,9 +45,11 @@ class StatusesController < ApplicationController
   def update
     respond_to do |format|
       if @status.update(status_params)
-        format.html { redirect_to @status, notice: 'ステータスを更新しました' }
+        flash[:success] = 'ステータスを更新しました'
+        format.html { redirect_to @status }
         format.json { render :show, status: :ok, location: @status }
       else
+        flash[:danger] = 'ステータス更新に失敗しました'
         format.html { render :edit }
         format.json { render json: @status.errors, status: :unprocessable_entity }
       end
@@ -61,7 +65,8 @@ class StatusesController < ApplicationController
   def destroy
     @status.destroy
     respond_to do |format|
-      format.html { redirect_back(fallback_location: root_path, notice: 'ステータスを削除しました') }
+      flash[:danger] = 'ステータスを削除しました'
+      format.html { redirect_back(fallback_location: root_path ) }
       format.json { head :no_content }
     end
   end
