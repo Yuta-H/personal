@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
-  devise_for :users
-  devise_scope :user do
-    root :to => "devise/sessions#new"
+  devise_for :users, controllers: {
+      confirmations: 'users/confirmations',
+      passwords:     'users/passwords',
+      registrations: 'users/registrations',
+      sessions:      'users/sessions',
+  }
+  devise_scope :users do
+    get 'users/sign_in', to: 'devise/sessions#new'
+    get 'users/sign_out', to: 'devise/sessions#destroy'
   end
-  get '/home', to: 'home#index'
+  root 'home#index'
+  get 'users/show'
   resources :statuses
   get '/delete_status_select', to: 'statuses#delete_status_select', as: 'delete_status_select'
   resources :troubles

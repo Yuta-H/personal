@@ -76,6 +76,6 @@ class SecretsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def secret_params
-      params.require(:secret).permit(:id, :name, :password, :key)
+      params.require(:secret).permit(:id, :name, :password, :key, user_id: current_user)
     end
 end
