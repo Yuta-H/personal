@@ -14,10 +14,6 @@
                           PUT    /users(.:format)                                                                         users/registrations#update
                           DELETE /users(.:format)                                                                         users/registrations#destroy
                           POST   /users(.:format)                                                                         users/registrations#create
-            users_sign_in GET    /users/sign_in(.:format)                                                                 devise/sessions#new
-           users_sign_out GET    /users/sign_out(.:format)                                                                devise/sessions#destroy
-                     root GET    /                                                                                        home#index
-               users_show GET    /users/show(.:format)                                                                    users#show
                  statuses GET    /statuses(.:format)                                                                      statuses#index
                           POST   /statuses(.:format)                                                                      statuses#create
                new_status GET    /statuses/new(.:format)                                                                  statuses#new

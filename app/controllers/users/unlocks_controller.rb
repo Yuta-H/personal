@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Devise::UnlocksController < DeviseController
+class Users::UnlocksController < DeviseController
   prepend_before_action :require_no_authentication
 
   # GET /resource/unlock/new

@@ -6,7 +6,7 @@ class CreateTroubles < ActiveRecord::Migration[5.2]
       t.references :category
       t.references :status
       t.string :solution
-      t.reference :user, null: false
+      t.references :user, null: false
 
       t.timestamps
     end

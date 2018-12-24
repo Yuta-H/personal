@@ -15,23 +15,29 @@ ActiveRecord::Schema.define(version: 2018_06_22_022514) do
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.integer "classification"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
   create_table "secrets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "password"
     t.string "key"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_secrets_on_user_id"
   end
 
   create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.integer "classification"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_statuses_on_user_id"
   end
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -39,10 +45,12 @@ ActiveRecord::Schema.define(version: 2018_06_22_022514) do
     t.bigint "category_id"
     t.bigint "status_id"
     t.boolean "delete_flg"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_tasks_on_category_id"
     t.index ["status_id"], name: "index_tasks_on_status_id"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "troubles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -51,10 +59,12 @@ ActiveRecord::Schema.define(version: 2018_06_22_022514) do
     t.bigint "category_id"
     t.bigint "status_id"
     t.string "solution"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_troubles_on_category_id"
     t.index ["status_id"], name: "index_troubles_on_status_id"
+    t.index ["user_id"], name: "index_troubles_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
