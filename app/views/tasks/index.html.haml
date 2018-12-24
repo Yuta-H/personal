@@ -6,7 +6,8 @@
 .container
   = form_for @variable_task, url: tasks_url, method: :post, html: {class: "form-inline"} do |form|
     = render partial: 'form', locals: { form: form }
-
+  - @variable_task.errors.full_messages.each do |message|
+    = message
 .container
   %h2.col-6{style: 'height: 10vmin;'} タスク管理
 .container{style: 'height: 15vmin;'}

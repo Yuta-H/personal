@@ -5,6 +5,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.references :category
       t.references :status
       t.boolean :delete_flg
+      t.references :user, null: false
 
       t.timestamps
     end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Devise::OmniauthCallbacksController < DeviseController
+class Users::OmniauthCallbacksController < DeviseController
   prepend_before_action { request.env["devise.skip_timeout"] = true }
 
   def passthru

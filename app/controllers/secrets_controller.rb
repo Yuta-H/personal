@@ -32,12 +32,14 @@ class SecretsController < ApplicationController
 
     respond_to do |format|
       if @secret.save
-        format.html { redirect_to secrets_url, notice: 'パスワード情報を追加しました' }
+        flash[:success] = 'パスワード情報を追加しました'
+        format.html { redirect_to secrets_url }
         format.json { render :show, status: :created, location: @secret }
       else
         @variable_secret = Secret.new
         @secrets = Secret.all
-        format.html { redirect_to secrets_url, notice: 'パスワード情報追加に失敗しました' }
+        flash[:danger] = 'パスワード情報追加に失敗しました'
+        format.html { redirect_to secrets_url }
         format.json { render json: @secret.errors, status: :unprocessable_entity }
       end
     end
@@ -60,7 +62,8 @@ class SecretsController < ApplicationController
   def destroy
     @secret.destroy
     respond_to do |format|
-      format.html { redirect_to secrets_url, notice: 'パスワード情報を削除しました' }
+      flash[:danger] = 'パスワード情報を削除しました'
+      format.html { redirect_to secrets_url }
       format.json { head :no_content }
     end
   end
@@ -73,6 +76,6 @@ class SecretsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def secret_params
-      params.require(:secret).permit(:id, :name, :password, :key)
+      params.require(:secret).permit(:id, :name, :password, :key, user_id: current_user)
     end
 end

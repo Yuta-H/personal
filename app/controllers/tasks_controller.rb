@@ -5,9 +5,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    params[:q] ||= {}
-    @search = Task.ransack(params[:q])
-    @tasks = @search.result(distinct: true)
+    set_search_tasks
     @variable_task = Task.new
   end
 
@@ -31,9 +29,12 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @variable_task.save
-        format.html { redirect_to tasks_url, notice: 'タスクを追加しました'}
+        flash[:success] = 'タスクを追加しました'
+        format.html { redirect_to tasks_url }
       else
-        format.html { render :new }
+        set_search_tasks
+        flash[:danger] = 'タスク追加に失敗しました'
+        format.html { render :index }
       end
     end
   end
@@ -43,10 +44,13 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @variable_task.update(task_params)
-        format.html { redirect_to tasks_path, notice: 'タスクを更新しました' }
+        flash[:success] = 'タスクを更新しました'
+        format.html { redirect_to tasks_path }
         format.json { render :show, status: :ok, location: @task }
       else
-        format.html { render :edit }
+        set_search_tasks
+        flash[:danger] = 'タスク更新に失敗しました'
+        format.html { render :index }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -57,6 +61,7 @@ class TasksController < ApplicationController
   def destroy
     @variable_task.destroy
     respond_to do |format|
+      flash[:danger] = 'タスクを削除しました'
       format.html { redirect_to tasks_url, notice: 'タスクを削除しました' }
       format.json { head :no_content }
     end
@@ -65,10 +70,17 @@ class TasksController < ApplicationController
   def delete_tasks
     Task.where("id in (?)", params[:delete_ids]).destroy_all
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'タスクを削除しました' }
+      flash[:danger] = 'タスクを削除しました'
+      format.html { redirect_to tasks_url }
       format.json { head :no_content }
     end
 
+  end
+
+  def set_search_tasks
+    params[:q] ||= {}
+    @search = Task.ransack(params[:q])
+    @tasks = @search.result(distinct: true)
   end
 
   private
@@ -79,6 +91,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name, :category_id, :status_id)
+      params.require(:task).permit(:name, :category_id, :status_id, user_id: current_user)
     end
 end

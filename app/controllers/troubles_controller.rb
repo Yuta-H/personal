@@ -5,9 +5,7 @@ class TroublesController < ApplicationController
   # GET /troubles
   # GET /troubles.json
   def index
-    params[:q] ||= {}
-    @search = Trouble.ransack(params[:q])
-    @troubles = @search.result(distinct: true)
+    set_search_troubles
     @variable_trouble = Trouble.new
   end
 
@@ -25,9 +23,12 @@ class TroublesController < ApplicationController
 
     respond_to do |format|
       if @variable_trouble.save
-        format.html { redirect_to troubles_url, notice: 'トラブルを追加しました' }
+        flash[:success] = 'トラブルを追加しました'
+        format.html { redirect_to troubles_url }
       else
-        format.html { render :new }
+        set_search_troubles
+        flash[:danger] = 'トラブル追加に失敗しました'
+        format.html { render :index }
       end
     end
   end
@@ -37,9 +38,12 @@ class TroublesController < ApplicationController
   def update
     respond_to do |format|
       if @variable_trouble.update(trouble_params)
-        format.html { redirect_to troubles_url, notice: 'トラブルを更新しました' }
+        flash[:success] = 'トラブルを更新しました'
+        format.html { redirect_to troubles_url }
         format.json { render :show, status: :ok, location: @trouble }
       else
+        set_search_troubles
+        flash[:danger] = 'トラブル更新に失敗しました'
         format.html { render :edit }
         format.json { render json: @trouble.errors, status: :unprocessable_entity }
       end
@@ -51,9 +55,16 @@ class TroublesController < ApplicationController
   def destroy
     @variable_trouble.destroy
     respond_to do |format|
-      format.html { redirect_to troubles_url, notice: 'トラブルを削除しました' }
+      flash[:danger] = 'トラブルを削除しました'
+      format.html { redirect_to troubles_url }
       format.json { head :no_content }
     end
+  end
+
+  def set_search_troubles
+    params[:q] ||= {}
+    @search = Trouble.ransack(params[:q])
+    @troubles = @search.result(distinct: true)
   end
 
   private
@@ -64,6 +75,6 @@ class TroublesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trouble_params
-      params.require(:trouble).permit(:name, :url, :solution, :status_id, :category_id)
+      params.require(:trouble).permit(:name, :url, :solution, :status_id, :category_id, user_id: current_user)
     end
 end

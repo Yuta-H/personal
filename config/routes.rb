@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
-  root 'home#index'
+  devise_for :users, controllers: {
+      confirmations: 'users/confirmations',
+      passwords: 'users/passwords',
+      registrations: 'users/registrations',
+      sessions: 'users/sessions',
+  }
+  devise_scope :user do
+    root :to => "devise/sessions#new"
+  end
   resources :statuses
   get '/delete_status_select', to: 'statuses#delete_status_select', as: 'delete_status_select'
   resources :troubles

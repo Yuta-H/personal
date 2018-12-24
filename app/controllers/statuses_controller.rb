@@ -29,10 +29,12 @@ class StatusesController < ApplicationController
 
     respond_to do |format|
       if @status.save
-        format.html { redirect_back(fallback_location: root_path, notice: 'ステータスを追加しました') }
+        flash[:success] = 'ステータスを追加しました'
+        format.html { redirect_back(fallback_location: root_path ) }
         format.json { render :show, status: :created, location: @status }
       else
-        format.html { render :new }
+        flash[:danger] = 'ステータス追加に失敗しました'
+        format.html { render :index }
         format.json { render json: @status.errors, status: :unprocessable_entity }
       end
     end
@@ -43,10 +45,12 @@ class StatusesController < ApplicationController
   def update
     respond_to do |format|
       if @status.update(status_params)
-        format.html { redirect_to @status, notice: 'ステータスを更新しました' }
+        flash[:success] = 'ステータスを更新しました'
+        format.html { redirect_to @status }
         format.json { render :show, status: :ok, location: @status }
       else
-        format.html { render :edit }
+        flash[:danger] = 'ステータス更新に失敗しました'
+        format.html { render :index }
         format.json { render json: @status.errors, status: :unprocessable_entity }
       end
     end
@@ -61,7 +65,8 @@ class StatusesController < ApplicationController
   def destroy
     @status.destroy
     respond_to do |format|
-      format.html { redirect_back(fallback_location: root_path, notice: 'ステータスを削除しました') }
+      flash[:danger] = 'ステータスを削除しました'
+      format.html { redirect_back(fallback_location: root_path ) }
       format.json { head :no_content }
     end
   end
@@ -74,6 +79,6 @@ class StatusesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def status_params
-      params.require(:status).permit(:name, :task_id, :trouble_id)
+      params.require(:status).permit(:name, :task_id, :trouble_id, user_id: current_user)
     end
 end

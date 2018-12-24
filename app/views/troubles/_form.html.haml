@@ -1,7 +1,10 @@
 .field.form-group
   = form.label '内容'
   .div
-    = form.text_field :name, class: 'form-control'
+    - if @variable_trouble.new_record?
+      = form.text_field :name, class: 'form-control'
+    - else
+      = form.text_field :name, class: 'form-control', required: true
 .field.form-group
   = form.label '状態'
   .div
@@ -17,7 +20,7 @@
 .field.form-group
   = form.label '参考記事'
   .div
-    = form.text_field :url, class: 'form-control'
+    = form.url_field :url, class: 'form-control'
 .field.form-group
   %br
     = form.submit class: "btn btn-success"

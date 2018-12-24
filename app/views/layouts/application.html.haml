@@ -13,9 +13,9 @@
         %ul.menu
           %li.spread
             - if user_signed_in?
-              = link_to '', destroy_user_session_path, method: :delete, class: 'glyphicon glyphicon-log-in unit', title: "ログイン"
+              = link_to '', destroy_user_session_path, method: :delete, class: 'glyphicon glyphicon-log-in unit', title: "ログアウト"
             - else
-              = link_to '', new_user_session_path, class: 'glyphicon glyphicon-log-out unit', title: "ログアウト"
+              = link_to '', new_user_session_path, class: 'glyphicon glyphicon-log-out unit', title: "ログイン"
           %li.spread
             = link_to '', tasks_path, class: 'glyphicon glyphicon-tasks unit', title: "タスク管理"
           %li.spread
@@ -42,6 +42,6 @@
               = link_to 'TRST', new_status_path(classification: Constants::TROUBLES_CLASSIFICATION), remote: true, class: "glyphicon glyphicon-arrow-up unit", title: "ステータス追加"
             %li.spread
               = link_to 'TRST', delete_status_select_path, remote: true, class: "glyphicon glyphicon-trash unit", title: "ステータス削除"
-    %p.notice= notice
-    %p.alert= alert
+    - flash.each do |message_type, message|
+      %div{:class => "alert alert-#{message_type}"}= message
     = yield
