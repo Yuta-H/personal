@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       if @category.save
         flash[:success] = 'カテゴリーを追加しました'
-        format.html {redirect_back(fallback_location: root_path, notice: 'カテゴリーを追加しました')}
+        format.html {redirect_back(fallback_location: root_path)}
         format.json { render :show, status: :created, location: @category }
       else
         flash[:danger] = 'カテゴリー追加に失敗しました'
@@ -51,7 +51,7 @@ class CategoriesController < ApplicationController
   end
 
   def delete_category_select
-    @categories = Category.all
+    @categories = Category.user_search(current_user)
   end
 
   # DELETE /categories/1
@@ -73,6 +73,6 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:id, :name, :classification, user_id: current_user)
+      params.require(:category).permit(:id, :name, :classification, :user_id)
     end
 end

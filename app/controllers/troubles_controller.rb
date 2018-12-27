@@ -63,7 +63,7 @@ class TroublesController < ApplicationController
 
   def set_search_troubles
     params[:q] ||= {}
-    @search = Trouble.ransack(params[:q])
+    @search = Trouble.user_search(current_user).ransack(params[:q])
     @troubles = @search.result(distinct: true)
   end
 
@@ -75,6 +75,6 @@ class TroublesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trouble_params
-      params.require(:trouble).permit(:name, :url, :solution, :status_id, :category_id, user_id: current_user)
+      params.require(:trouble).permit(:name, :url, :solution, :status_id, :category_id, :user_id)
     end
 end

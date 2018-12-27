@@ -4,6 +4,16 @@ class Status < ApplicationRecord
 
   validates :name, presence: true
 
-  scope :branch_tasks, -> {where(classification: Constants::TASKS_CLASSIFICATION)}
-  scope :branch_troubles, -> {where(classification: Constants::TROUBLES_CLASSIFICATION)}
+  scope :user_search, -> (user_id){where(user_id: user_id)}
+
+  scope :branch_tasks, -> (user_id){
+    s = where(classification: Constants::TASKS_CLASSIFICATION)
+    s = s.where(user_id: user_id)
+    s
+  }
+  scope :branch_troubles, -> (user_id){
+    s = where(classification: Constants::TROUBLES_CLASSIFICATION)
+    s = s.where(user_id: user_id)
+    s
+  }
 end

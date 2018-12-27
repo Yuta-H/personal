@@ -8,7 +8,7 @@ class SecretsController < ApplicationController
   # GET /secrets.json
   def index
     @variable_secret = Secret.new
-    @secrets = Secret.all
+    @secrets = Secret.user_search(current_user)
   end
 
   # GET /secrets/1
@@ -76,6 +76,6 @@ class SecretsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def secret_params
-      params.require(:secret).permit(:id, :name, :password, :key, user_id: current_user)
+      params.require(:secret).permit(:id, :name, :password, :key, :user_id)
     end
 end
