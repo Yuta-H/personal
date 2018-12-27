@@ -4,11 +4,12 @@
 #status-delete-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
 #trouble-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
 #trouble-show-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
-.container
-  = form_for @variable_trouble, url: troubles_url, method: :post, html: {class: "form-inline"} do |form|
-    = render partial: 'form', locals: { form: form }
-  - @variable_trouble.errors.full_messages.each do |message|
-    = message
+.jumbotron
+  .container
+    = form_for @variable_trouble, url: troubles_url, method: :post, html: {class: "form-inline"} do |form|
+      = render partial: 'form', locals: { form: form }
+    - @variable_trouble.errors.full_messages.each do |message|
+      = message
 .container
   %h2.col-6{style: 'height: 10vmin;'} トラブル管理
 .container{style: 'height: 15vmin;'}
@@ -18,7 +19,7 @@
       .div
         .col-md-2.col-md-offset-5
           .form-group
-            = f.collection_select :category_id_eq, Category.branch_troubles, :id, :name , {}, {class: "form-control"}
+            = f.collection_select :category_id_eq, Category.branch_troubles(current_user), :id, :name , {}, {class: "form-control"}
             = button_tag "検索", {class: 'btn btn-primary'}
 .container{style: 'height: 20vmin;'}
   %table.table.table-hover

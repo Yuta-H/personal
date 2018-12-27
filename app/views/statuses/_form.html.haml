@@ -5,6 +5,8 @@
         .field
           = status_form.label "ステータス名"
           = status_form.text_field :name
+          = status_form.hidden_field :classification, value: params[:classification]
+          = status_form.hidden_field :user_id, value: current_user.id
       .modal-footer
         .actions
           = status_form.submit

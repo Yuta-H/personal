@@ -1,6 +1,6 @@
 .login
   .login-triangle
-  %h2.login-header Forgot your password?
+  %h2.login-header パスワード変更用メール送信
   %form.login-container
     = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "login-container"}) do |f|
       = devise_error_messages!
@@ -9,5 +9,5 @@
         %br/
         = f.email_field :email, autofocus: true, autocomplete: "email"
       .actions
-        = f.submit "reset password!!"
+        = f.submit "メール送信"
     = render "devise/shared/links"

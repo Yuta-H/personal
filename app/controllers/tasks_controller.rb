@@ -62,7 +62,7 @@ class TasksController < ApplicationController
     @variable_task.destroy
     respond_to do |format|
       flash[:danger] = 'タスクを削除しました'
-      format.html { redirect_to tasks_url, notice: 'タスクを削除しました' }
+      format.html { redirect_to tasks_url }
       format.json { head :no_content }
     end
   end
@@ -79,7 +79,7 @@ class TasksController < ApplicationController
 
   def set_search_tasks
     params[:q] ||= {}
-    @search = Task.ransack(params[:q])
+    @search = Task.user_search(current_user).ransack(params[:q])
     @tasks = @search.result(distinct: true)
   end
 
@@ -91,6 +91,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name, :category_id, :status_id, user_id: current_user)
+      params.require(:task).permit(:name, :category_id, :status_id, :user_id)
     end
 end
